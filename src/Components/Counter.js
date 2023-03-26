@@ -2,7 +2,7 @@ import React, {useState,useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../Store/cart.slice";
 import { updateCart, removeFromCart } from "../Store/cart.action";
-import {Button} from "react-bootstrap";
+import {button} from "react-bootstrap";
 
 const CounterStrip = ({ product }) => {
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const CounterStrip = ({ product }) => {
     };
     useEffect(() => {
         
-        const item = items.find((item) => item.product._id === (product.id?product.id:product._id));
+        const item = items.find((item) => item.product?._id === (product.id?product.id:product?._id));
         
         if (item) {
         setCount(item.quantity);
@@ -36,14 +36,14 @@ const CounterStrip = ({ product }) => {
 
 
     return (
-        <div className="counterStrip" >
-        <Button className="btn" variant="primary" onClick={handleDecrement} disabled={count===1}>-</Button>
-        <strong>{count}</strong>
-        <Button className="btn" variant="primary" onClick={handleIncrement}>+</Button>
+        <div className="flex flex-row justify-between my-4" >
+        <button className="bg-blue-500 rounded-md  p-2"  onClick={handleDecrement} disabled={count===1}>-</button>
+        <strong className="my-auto mx-2">{count}</strong>
+        <button className="bg-blue-500 rounded-md p-2" variant="primary" onClick={handleIncrement}>+</button>
 
-        <Button onClick={() => dispatch(removeFromCart(items.find((item) => item.product._id === (product.id?product.id:product._id))))}>
+        <button className="bg-blue-500 rounded-md px-1 py-2 mx-2 " onClick={() => dispatch(removeFromCart(items.find((item) => item.product?._id === (product.id?product.id:product._id))))}>
             Remove
-        </Button>
+        </button>
         </div>
     );
     }

@@ -8,11 +8,14 @@ import store from "./Store";
 import AddProduct from './Pages/AddProduct';
 import { Provider } from "react-redux";
 import { fetchCartData } from './Store/cart.action';
+import { fetchProducts } from './Store/product.action';
+import { ProductInfo } from './Pages/ProductInfo';
 
 
 
 function App() {
   useEffect(() => {
+    store.dispatch(fetchProducts());
     store.dispatch(fetchCartData());
 
 
@@ -27,6 +30,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/addproduct' element={<AddProduct />} />
+          <Route path="/product/:id" element={<ProductInfo />} />
 
         </Routes>
       </BrowserRouter>

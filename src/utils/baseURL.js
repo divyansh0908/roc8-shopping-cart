@@ -1,0 +1,1 @@
+export const baseURL = "https://shopping-cart-divyansh09.onrender.com/"

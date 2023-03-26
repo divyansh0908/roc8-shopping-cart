@@ -1,9 +1,10 @@
+import { baseURL } from "../utils/baseURL";
 import { productActions } from "./product.slice";
 
 export const fetchProducts = () => {
     
     return async dispatch => {
-        const response = await fetch("http://localhost:5000/api/products");
+        const response = await fetch(`${baseURL}api/products`);
         const responseData = await response.json();
         const loadedProducts = [];
         for (const key in responseData) {
@@ -25,7 +26,7 @@ export const fetchProducts = () => {
 
 export const addProduct = (name, description, unitPrice, quantity, image) => {
     return async dispatch => {
-        const response = await fetch("http://localhost:5000/api/products", {
+        const response = await fetch(`${baseURL}api/products`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -39,7 +40,11 @@ export const addProduct = (name, description, unitPrice, quantity, image) => {
             })
         });
         const responseData = await response.json();
+        if (!response.ok) {
+            throw new Error(responseData.message);
+        }else{
         dispatch(fetchProducts());
+        }
     };
     
 };

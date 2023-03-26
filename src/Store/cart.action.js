@@ -1,10 +1,11 @@
 import { cartActions } from "./cart.slice";
+import { baseURL } from "../utils/baseURL";
 
 export const fetchCartData = () => {
     return async (dispatch) => {
         const fetchData = async () => {
         const response = await fetch(
-            "http://localhost:5000/api/cart"
+            `${baseURL}api/cart`
         );
     
         if (!response.ok) {
@@ -31,7 +32,7 @@ export const addToCart = (cart) => {
     
     return async (dispatch) => {
         const sendRequest = async () => {
-        const response = await fetch("http://localhost:5000/api/cart", {
+        const response = await fetch(`${baseURL}api/cart`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
@@ -60,7 +61,7 @@ export const removeFromCart = (cart) => {
 
     return async (dispatch) => {
         const sendRequest = async () => {
-        const response = await fetch(`http://localhost:5000/api/cart/${cart.id}`, {
+        const response = await fetch(`${baseURL}api/cart/${cart.id}`, {
             method: "DELETE",
             headers: {
             "Content-Type": "application/json",
@@ -88,7 +89,7 @@ export const updateCart = (cart) => {
  
     return async (dispatch) => {
         const sendRequest = async () => {
-        const response = await fetch(`http://localhost:5000/api/cart/${cart.productId}/${cart.count}`, {
+        const response = await fetch(`${baseURL}api/cart/${cart.productId}/${cart.count}`, {
             method: "PUT",
             headers: {
             "Content-Type": "application/json",
